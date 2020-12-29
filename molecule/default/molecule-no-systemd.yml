@@ -16,27 +16,24 @@ lint: |
   ansible-lint
   flake8
 platforms:
-  - name: amazonlinux2
-    image: amazonlinux:2
-  - name: debian9
-    image: debian:stretch-slim
-    dockerfile: Dockerfile_debian_9.j2
-  - name: debian10
-    image: debian:buster-slim
-  - name: debian11
-    image: debian:bullseye-slim
+  # - name: amazonlinux2
+  #   image: amazonlinux:2
+  # - name: debian10
+  #   image: debian:buster-slim
+  # - name: debian11
+  #   image: debian:bullseye-slim
   - name: kali
     image: kalilinux/kali-rolling
-  - name: fedora32
-    image: fedora:32
-  - name: fedora33
-    image: fedora:33
-  - name: ubuntu16
-    image: ubuntu:xenial
-  - name: ubuntu18
-    image: ubuntu:bionic
-  - name: ubuntu20
-    image: ubuntu:focal
+  # - name: fedora32
+  #   image: fedora:32
+  # - name: fedora33
+  #   image: fedora:33
+  # - name: ubuntu16
+  #   image: ubuntu:xenial
+  # - name: ubuntu18
+  #   image: ubuntu:bionic
+  # - name: ubuntu20
+  #   image: ubuntu:focal
 provisioner:
   name: ansible
   config_options:

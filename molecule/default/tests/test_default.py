@@ -4,7 +4,6 @@
 import os
 
 # Third-Party Libraries
-import pytest
 import testinfra.utils.ansible_runner
 
 testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
@@ -12,7 +11,11 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
 ).get_hosts("all")
 
 
-@pytest.mark.parametrize("x", [True])
-def test_packages(host, x):
-    """Run a dummy test, just to show what one would look like."""
-    assert x
+def test_bsp_installed(host):
+    """Test that Burp Suite Pro was installed."""
+    dir_full_path = "/usr/local/BurpSuitePro"
+    directory = host.file(dir_full_path)
+    assert directory.exists
+    assert directory.is_directory
+    # Make sure that the directory is not empty
+    assert host.run_expect([0], f'[ -n "$(ls -A {dir_full_path})" ]')
