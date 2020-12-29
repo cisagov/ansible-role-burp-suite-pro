@@ -1,10 +1,12 @@
 ---
 galaxy_info:
-  author: First Last
-  description: Skeleton Ansible role with test user
+  author: Shane Frasier
+  description: Install Burp Suite Professional
   company: CISA Cyber Assessments
   galaxy_tags:
-    - skeleton
+    - burp
+    - burpsuite
+    - burpsuitepro
   license: CC0
   # With the release of version 2.10, Ansible finally correctly
   # identifies Kali Linux as being the Kali distribution of the Debian
@@ -13,26 +15,25 @@ galaxy_info:
   # 2.10 or newer.
   min_ansible_version: 2.10
   platforms:
-    - name: Amazon
-      versions:
-        - 2
+    # - name: Amazon
+    #   versions:
+    #     - 2
     - name: Debian
       versions:
-        - stretch
-        - buster
+        # - buster
         # Kali linux isn't an option here, but it is based on
         # Debian Testing:
         # https://www.kali.org/docs/policy/kali-linux-relationship-with-debian
         - bullseye
-    - name: Fedora
-      versions:
-        - 32
-        - 33
-    - name: Ubuntu
-      versions:
-        - xenial
-        - bionic
-        - focal
-  role_name: skeleton_with_test_user
+    # - name: Fedora
+    #   versions:
+    #     - 32
+    #     - 33
+    # - name: Ubuntu
+    #   versions:
+    #     - xenial
+    #     - bionic
+    #     - focal
+  role_name: burp_suite_pro
 
 dependencies: []
