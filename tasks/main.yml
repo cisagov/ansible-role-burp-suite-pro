@@ -1,14 +1,14 @@
 ---
 # Check if Burp Suite Pro is already installed
 - name: Check if Burp Suite Pro is already installed
-  stat:
+  ansible.builtin.stat:
     path: "{{ burp_suite_install_directory }}"
   register: burp_suite_directory
 
 - name: Install Burp Suite Pro
   block:
     - name: Grab Burp Suite Pro installer from S3
-      aws_s3:
+      ansible.builtin.aws_s3:
         bucket: "{{ third_party_bucket_name }}"
         object: "{{ burp_suite_installer_object_name }}"
         dest: /tmp/{{ burp_suite_installer_object_name }}
@@ -17,17 +17,17 @@
       delegate_to: localhost
 
     - name: Copy the Burp Suite Pro installer
-      copy:
+      ansible.builtin.copy:
         dest: /tmp/{{ burp_suite_installer_object_name }}
         mode: 0700
         src: /tmp/{{ burp_suite_installer_object_name }}
 
     - name: Install Burp Suite Pro installation prerequisites
-      package:
+      ansible.builtin.package:
         name: "{{ burp_suite_installation_prerequisites }}"
 
     - name: Install Burp Suite Pro
-      expect:
+      ansible.builtin.expect:
         command: /tmp/{{ burp_suite_installer_object_name }}
         creates: "{{ burp_suite_install_directory }}"
         responses:
@@ -66,14 +66,14 @@
       register: install_command
 
     - name: Delete local copy of Burp Suite Pro installer
-      file:
+      ansible.builtin.file:
         path: /tmp/{{ burp_suite_installer_object_name }}
         state: absent
       become: no
       delegate_to: localhost
 
     - name: Delete remote copy of Burp Suite Pro installer
-      file:
+      ansible.builtin.file:
         path: /tmp/{{ burp_suite_installer_object_name }}
         state: absent
 
