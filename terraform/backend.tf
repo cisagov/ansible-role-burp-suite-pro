@@ -3,7 +3,7 @@ terraform {
     bucket         = "cisa-cool-terraform-state"
     dynamodb_table = "terraform-state-lock"
     encrypt        = true
-    key            = "skeleton-ansible-role-with-test-user/terraform.tfstate"
+    key            = "ansible-role-burp-suite-pro/terraform.tfstate"
     profile        = "cool-terraform-backend"
     region         = "us-east-1"
   }

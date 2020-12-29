@@ -1,8 +1,8 @@
-# skeleton-ansible-role-with-test-user #
+# ansible-role-burp-suite-pro #
 
-[![GitHub Build Status](https://github.com/cisagov/skeleton-ansible-role-with-test-user/workflows/build/badge.svg)](https://github.com/cisagov/skeleton-ansible-role-with-test-user/actions)
-[![Total alerts](https://img.shields.io/lgtm/alerts/g/cisagov/skeleton-ansible-role-with-test-user.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/cisagov/skeleton-ansible-role-with-test-user/alerts/)
-[![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/cisagov/skeleton-ansible-role-with-test-user.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/cisagov/skeleton-ansible-role-with-test-user/context:python)
+[![GitHub Build Status](https://github.com/cisagov/ansible-role-burp-suite-pro/workflows/build/badge.svg)](https://github.com/cisagov/ansible-role-burp-suite-pro/actions)
+[![Total alerts](https://img.shields.io/lgtm/alerts/g/cisagov/ansible-role-burp-suite-pro.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/cisagov/ansible-role-burp-suite-pro/alerts/)
+[![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/cisagov/ansible-role-burp-suite-pro.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/cisagov/ansible-role-burp-suite-pro/context:python)
 
 This is a skeleton project that can be used to quickly get a new
 [cisagov](https://github.com/cisagov) Ansible role GitHub project
@@ -58,7 +58,7 @@ of the Project Setup README.
 
 If you have appropriate permissions for the repository you can view
 existing secrets on the [appropriate
-page](https://github.com/cisagov/skeleton-ansible-role-with-test-user/settings/secrets)
+page](https://github.com/cisagov/ansible-role-burp-suite-pro/settings/secrets)
 in the repository's settings.
 
 ## Requirements ##

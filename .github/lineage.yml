@@ -1,5 +1,5 @@
 ---
 lineage:
   skeleton:
-    remote-url: https://github.com/cisagov/skeleton-ansible-role.git
+    remote-url: https://github.com/cisagov/skeleton-ansible-role-with-test-user.git
 version: '1'
