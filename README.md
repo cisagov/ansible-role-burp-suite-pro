@@ -59,7 +59,20 @@ None.
 
 ## Role Variables ##
 
-None.
+* `burp_suite_install_directory` - the directory where Burp Suite Pro
+  should be installed.  Defaults to "/usr/local/BurpSuitePro".
+* `burp_suite_installer_object_name` - the name of the S3 object
+  corresponding to the Burp Suite Pro Linux installer.  Defaults to
+  "burpsuite_pro_linux_v2020_11.sh".
+* `burp_suite_license_object_name` - the name of the S3 object
+  corresponding to the Burp Suite Pro license.  Defaults to
+  "burpsuite_pro.license".
+* `burp_suite_symlinks_directory` - the directory where symlinks to
+  the Burp Suite Pro executables should be created.  Defaults to
+  "/usr/local/bin".
+* `third_party_bucket_name` - the name of the AWS S3 bucket where
+  third-party software is located.  Defaults to
+  "cisa-cool-third-party-production".
 
 ## Dependencies ##
 
