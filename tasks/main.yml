@@ -7,14 +7,17 @@
 
 - name: Install Burp Suite Pro
   block:
-    - name: Grab Burp Suite Pro installer from S3
+    - name: Grab Burp Suite Pro installer and license from S3
       ansible.builtin.aws_s3:
         bucket: "{{ third_party_bucket_name }}"
-        object: "{{ burp_suite_installer_object_name }}"
-        dest: /tmp/{{ burp_suite_installer_object_name }}
+        object: "{{ item }}"
+        dest: /tmp/{{ item }}
         mode: get
       become: no
       delegate_to: localhost
+      loop:
+        - "{{ burp_suite_installer_object_name }}"
+        - "{{ burp_suite_license_object_name }}"
 
     - name: Copy the Burp Suite Pro installer
       ansible.builtin.copy:
@@ -57,20 +60,55 @@
           "Create symlinks\\?": "y"
           "Select the folder where you would like Burp Suite Professional to create symlinks, then click Next": "{{ burp_suite_symlinks_directory }}"
         timeout: 300
-      # This failed_when clause is required because the installer
-      # command returns a nonzero return code even when it succeeds.
-      failed_when:
-        - install_command.rc != 0
-        - install_command.rc != 1
-        - install_command.rc != 2
-      register: install_command
 
-    - name: Delete local copy of Burp Suite Pro installer
+    # We can't use the ansible.builtin.expect module here because the
+    # licensing process outputs the entire license text, which
+    # overflows the default input buffer size of 2000 bytes.  Hence we
+    # need to increase the input buffer size for expect, and this
+    # cannot be done via the ansible.builtin.expect module.
+    - name: License Burp Suite Pro
+      ansible.builtin.shell: |
+        # $ ./jre/bin/java -Djava.awt.headless=true -jar ./burpsuite_pro.jar
+        # Burp Suite Professional Terms & Conditions of Supply
+        #
+        # <snip>
+        # License text
+        # </snip>
+        # Do you accept the license agreement? (y/n)
+        # y
+        # This version of Burp requires a license key. To continue, please paste your license key below.
+        # <license key>
+        # Burp will now attempt to contact the license server and activate your license. This will require Internet access.
+        # NOTE: license activations are monitored. If you perform too many activations, further activations for this license may be prevented.
+        # Enter preferred activation method (o=online activation; m=manual activation; r=re-enter license key)
+        # o
+        # Your license is successfully installed and activated.
+
+        # Increase the input buffer size from 2000 to 10000 bytes
+        match-max 10000
+        spawn ./jre/bin/java -Djava.awt.headless=true -jar ./burpsuite_pro.jar
+
+        expect "Do you accept the license agreement\\?"
+        send "y\n"
+
+        expect "To continue, please paste your license key below\\."
+        send "{{ lookup('file', '/tmp/' + burp_suite_license_object_name) }}"
+
+        expect "Enter preferred activation method"
+        send "o\n"
+      args:
+        chdir: "{{ burp_suite_install_directory }}"
+        executable: /usr/bin/expect
+
+    - name: Delete local copies of Burp Suite Pro installer and license file
       ansible.builtin.file:
-        path: /tmp/{{ burp_suite_installer_object_name }}
+        path: /tmp/{{ item }}
         state: absent
       become: no
       delegate_to: localhost
+      loop:
+        - "{{ burp_suite_installer_object_name }}"
+        - "{{ burp_suite_license_object_name }}"
 
     - name: Delete remote copy of Burp Suite Pro installer
       ansible.builtin.file:
