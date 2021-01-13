@@ -4,11 +4,21 @@ third_party_bucket_name: cisa-cool-third-party-production
 # The name of the S3 object corresponding to the Burp Suite Pro Linux
 # installer
 burp_suite_installer_object_name: burpsuite_pro_linux_v2020_11.sh
+# The name of the S3 object corresponding to the Burp Suite Pro
+# license
+burp_suite_license_object_name: burpsuite_pro.license
 # Prerequisites needed to install Burp Suite Pro
 burp_suite_installation_prerequisites:
+  # We use expect directly to perform the licensing.  We can't use the
+  # ansible.builtin.expect module because the process outputs the
+  # entire license text, which overflows the default input buffer size
+  # of 2000 bytes.  Hence we need to increase the input buffer size
+  # for expect, and this cannot be done via the ansible.builtin.expect
+  # module.
+  - expect
   # The installer application requires this
   - libfreetype6
-  # This is required for the Ansible expect module
+  # This is required for the ansible.builtin.expect module
   - python3-pexpect
 # The directory where Burp Suite Pro should be installed
 burp_suite_install_directory: /usr/local/BurpSuitePro
