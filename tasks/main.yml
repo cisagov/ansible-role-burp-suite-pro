@@ -19,11 +19,15 @@
         - "{{ installer_object_name }}"
         - "{{ license_object_name }}"
 
-    - name: Copy the Burp Suite Pro installer
+    - name: Copy the Burp Suite Pro installer and license
       ansible.builtin.copy:
-        dest: /tmp/{{ installer_object_name }}
-        mode: 0700
-        src: /tmp/{{ installer_object_name }}
+        dest: /tmp/{{ item.file }}
+        mode: "{{ item.mode }}"
+        src: /tmp/{{ item.file }}
+      loop:
+        - {file: "{{ installer_object_name }}", mode: "0700"}
+        # Other users must be able to read the license file as well
+        - {file: "{{ license_object_name }}", mode: "0644"}
 
     - name: Install Burp Suite Pro installation prerequisites
       ansible.builtin.package:
@@ -112,10 +116,12 @@
         - "{{ installer_object_name }}"
         - "{{ license_object_name }}"
 
-    # The licensing process appears to delete the license file for you
-    - name: Delete remote copy of Burp Suite Pro installer
+    - name: Delete remote copy of Burp Suite Pro installer and license file
       ansible.builtin.file:
-        path: /tmp/{{ installer_object_name }}
+        path: /tmp/{{ item }}
         state: absent
+      loop:
+        - "{{ installer_object_name }}"
+        - "{{ license_object_name }}"
 
   when: not burp_suite_directory.stat.exists
