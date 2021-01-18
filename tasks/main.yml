@@ -102,6 +102,8 @@
 
         expect "Enter preferred activation method"
         send "o\n"
+
+        expect "Your license is successfully installed and activated\\."
       args:
         chdir: "{{ install_directory }}"
         executable: /usr/bin/expect
