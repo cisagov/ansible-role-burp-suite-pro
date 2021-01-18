@@ -30,3 +30,7 @@ install_directory: /usr/local/BurpSuitePro
 # The directory where symlinks to the Burp Suite Pro executables
 # should be created
 symlinks_directory: /usr/local/bin
+
+# Burp Suite Pro must be licensed individually for each user
+users:
+  - root

@@ -99,6 +99,8 @@
       args:
         chdir: "{{ install_directory }}"
         executable: /usr/bin/expect
+      become_user: "{{ item }}"
+      loop: "{{ users }}"
 
     - name: Delete local copies of Burp Suite Pro installer and license file
       ansible.builtin.file:
