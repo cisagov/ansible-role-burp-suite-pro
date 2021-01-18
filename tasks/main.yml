@@ -2,7 +2,7 @@
 # Check if Burp Suite Pro is already installed
 - name: Check if Burp Suite Pro is already installed
   ansible.builtin.stat:
-    path: "{{ burp_suite_install_directory }}"
+    path: "{{ install_directory }}"
   register: burp_suite_directory
 
 - name: Install Burp Suite Pro
@@ -16,23 +16,23 @@
       become: no
       delegate_to: localhost
       loop:
-        - "{{ burp_suite_installer_object_name }}"
-        - "{{ burp_suite_license_object_name }}"
+        - "{{ installer_object_name }}"
+        - "{{ license_object_name }}"
 
     - name: Copy the Burp Suite Pro installer
       ansible.builtin.copy:
-        dest: /tmp/{{ burp_suite_installer_object_name }}
+        dest: /tmp/{{ installer_object_name }}
         mode: 0700
-        src: /tmp/{{ burp_suite_installer_object_name }}
+        src: /tmp/{{ installer_object_name }}
 
     - name: Install Burp Suite Pro installation prerequisites
       ansible.builtin.package:
-        name: "{{ burp_suite_installation_prerequisites }}"
+        name: "{{ installation_prerequisites }}"
 
     - name: Install Burp Suite Pro
       ansible.builtin.expect:
-        command: /tmp/{{ burp_suite_installer_object_name }}
-        creates: "{{ burp_suite_install_directory }}"
+        command: /tmp/{{ installer_object_name }}
+        creates: "{{ install_directory }}"
         responses:
           # $ sudo ./burpsuite_pro_linux_v2020_11.sh
           # Unpacking JRE ...
@@ -56,9 +56,9 @@
           # Setup has finished installing Burp Suite Professional on your computer.
           # Finishing installation ...
           "This will install Burp Suite Professional on your computer\\.": o
-          "Where should Burp Suite Professional be installed\\?": "{{ burp_suite_install_directory }}"
+          "Where should Burp Suite Professional be installed\\?": "{{ install_directory }}"
           "Create symlinks\\?": "y"
-          "Select the folder where you would like Burp Suite Professional to create symlinks, then click Next": "{{ burp_suite_symlinks_directory }}"
+          "Select the folder where you would like Burp Suite Professional to create symlinks, then click Next": "{{ symlinks_directory }}"
         timeout: 300
 
     # We can't use the ansible.builtin.expect module here because the
@@ -92,12 +92,12 @@
         send "y\n"
 
         expect "To continue, please paste your license key below\\."
-        send "{{ lookup('file', '/tmp/' + burp_suite_license_object_name) }}"
+        send "{{ lookup('file', '/tmp/' + license_object_name) }}"
 
         expect "Enter preferred activation method"
         send "o\n"
       args:
-        chdir: "{{ burp_suite_install_directory }}"
+        chdir: "{{ install_directory }}"
         executable: /usr/bin/expect
 
     - name: Delete local copies of Burp Suite Pro installer and license file
@@ -107,12 +107,13 @@
       become: no
       delegate_to: localhost
       loop:
-        - "{{ burp_suite_installer_object_name }}"
-        - "{{ burp_suite_license_object_name }}"
+        - "{{ installer_object_name }}"
+        - "{{ license_object_name }}"
 
+    # The licensing process appears to delete the license file for you
     - name: Delete remote copy of Burp Suite Pro installer
       ansible.builtin.file:
-        path: /tmp/{{ burp_suite_installer_object_name }}
+        path: /tmp/{{ installer_object_name }}
         state: absent
 
   when: not burp_suite_directory.stat.exists
