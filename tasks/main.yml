@@ -89,14 +89,14 @@
         # Your license is successfully installed and activated.
 
         # Increase the input buffer size from 2000 to 10000 bytes
-        match-max 10000
+        match_max 10000
         spawn ./jre/bin/java -Djava.awt.headless=true -jar ./burpsuite_pro.jar
 
         expect "Do you accept the license agreement\\?"
         send "y\n"
 
         expect "To continue, please paste your license key below\\."
-        send "{{ lookup('file', '/tmp/' + license_object_name) }}"
+        send "{{ lookup('file', '/tmp/' + license_object_name) }}\n"
 
         expect "Enter preferred activation method"
         send "o\n"
