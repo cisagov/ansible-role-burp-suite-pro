@@ -88,6 +88,8 @@
         # o
         # Your license is successfully installed and activated.
 
+        # Disable any internal timeout that expect has
+        set timeout -1
         # Increase the input buffer size from 2000 to 10000 bytes
         match_max 10000
         spawn ./jre/bin/java -Djava.awt.headless=true -jar ./burpsuite_pro.jar
