@@ -73,7 +73,7 @@ None.
   third-party software is located.  Defaults to
   "cisa-cool-third-party-production".
 * `users` - a list of users for whom Burp Suite Pro should be
-  licensed.  (Burp Suite pro must be licensed separately for each user
+  licensed.  (Burp Suite Pro must be licensed separately for each user
   that requires it.)  Defaults to only the `root` user.
 
 ## Dependencies ##
