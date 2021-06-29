@@ -15,8 +15,6 @@ module "user" {
   # This build user does not need to access any SSM parameters, so we
   # just place a dummy value here.
   ssm_parameters = ["/dummy/value"]
-
-  tags = var.tags
 }
 
 # Attach third-party S3 bucket read-only policy to the production
