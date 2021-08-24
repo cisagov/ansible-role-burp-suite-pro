@@ -62,29 +62,14 @@ None.
 
 ## Role Variables ##
 
-- `install_directory` - the directory where Burp Suite Pro should be
-  installed.  Defaults to "/usr/local/BurpSuitePro".
-- `installer_object_name` - the name of the S3 object corresponding to
-  the Burp Suite Pro Linux installer.  Defaults to
-  "burpsuite_pro_linux_v2020_11.sh".
-- `license_object_name` - the name of the S3 object corresponding to
-  the Burp Suite Pro license.  Defaults to "burpsuite_pro.license".
-- `symlinks_directory` - the directory where symlinks to the Burp
-  Suite Pro executables should be created.  Defaults to
-  "/usr/local/bin".
-- `third_party_bucket_name` - the name of the AWS S3 bucket where
-  third-party software is located.  Defaults to
-  "cisa-cool-third-party-production".
-- `users` - a list of users for whom Burp Suite Pro should be
-  licensed.  (Burp Suite Pro must be licensed separately for each user
-  that requires it.)  Defaults to only the `root` user.
-
-<!--
 | Variable | Description | Default | Required |
 |----------|-------------|---------|----------|
-| optional_variable | Describe its purpose. | `default_value` | No |
-| required_variable | Describe its purpose. | n/a | Yes |
--->
+| install\_directory | The directory where Burp Suite Pro should be installed. | `/usr/local/BurpSuitePro` | No |
+| installer\_object\_name | The name of the S3 object corresponding to the Burp Suite Pro Linux installer. | `burpsuite_pro_linux_v2020_11.sh` | No |
+| license\_object\_name | The name of the S3 object corresponding to the Burp Suite Pro license. | `burpsuite_pro.license` | No |
+| symlinks_directory | The directory where symlinks to the Burp Suite Pro executables should be created. | `/usr/local/bin` | No |
+| third_party_bucket_name | The name of the AWS S3 bucket where third-party software is located. | `cisa-cool-third-party-production` | No |
+| users | A list of users for whom Burp Suite Pro should be licensed.  (Burp Suite Pro must be licensed separately for each user that requires it.) | `[root]` | No |
 
 ## Dependencies ##
 
