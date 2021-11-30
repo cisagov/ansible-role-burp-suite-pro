@@ -4,7 +4,7 @@ third_party_bucket_name: cisa-cool-third-party-production
 
 # The name of the S3 object corresponding to the Burp Suite Pro Linux
 # installer
-installer_object_name: burpsuite_pro_linux_v2020_11.sh
+installer_object_name: burpsuite_pro_linux.sh
 
 # The name of the S3 object corresponding to the Burp Suite Pro
 # license

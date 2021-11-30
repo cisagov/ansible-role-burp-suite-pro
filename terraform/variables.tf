@@ -21,7 +21,7 @@ variable "production_objects" {
   description = "The Burp Suite Pro installer and license objects inside the production bucket."
   default = [
     "burpsuite_pro.license",
-    "burpsuite_pro_linux_v2020_11.sh",
+    "burpsuite_pro_linux.sh",
   ]
 }
 
@@ -36,7 +36,7 @@ variable "staging_objects" {
   description = "The Burp Suite Pro installer and license objects inside the staging bucket."
   default = [
     "burpsuite_pro.license",
-    "burpsuite_pro_linux_v2020_11.sh",
+    "burpsuite_pro_linux.sh",
   ]
 }
 
