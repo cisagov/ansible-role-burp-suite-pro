@@ -50,6 +50,11 @@
           # Where should Burp Suite Professional be installed?
           # [/usr/local/BurpSuitePro]
           #
+          # Select the file associations you want to create; clear the file associations
+          # you do not want to create. Click Next when you are ready to continue.
+          # Burp Suite Project File (*.burp)
+          # Yes [y, Enter], No [n]
+          #
           # Create symlinks?
           # Yes [y, Enter], No [n]
           #
@@ -61,8 +66,9 @@
           # Finishing installation ...
           "This will install Burp Suite Professional on your computer\\.": o
           "Where should Burp Suite Professional be installed\\?": "{{ install_directory }}"
-          "Create symlinks\\?": "y"
-          "Select the folder where you would like Burp Suite Professional to create symlinks, then click Next": "{{ symlinks_directory }}"
+          "Burp Suite Project File": "y"
+          "Create symlinks": "y"
+          "Select the folder where you would like Burp Suite Professional to create symlinks": "{{ symlinks_directory }}"
         timeout: 300
 
     # We can't use the ansible.builtin.expect module here because the

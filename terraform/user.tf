@@ -17,8 +17,7 @@ module "user" {
   ssm_parameters = ["/dummy/value"]
 }
 
-# Attach third-party S3 bucket read-only policy to the production
-# EC2AMICreate role
+# Attach third-party S3 bucket read-only policy to the production role
 resource "aws_iam_role_policy_attachment" "thirdpartybucketread_production" {
   provider = aws.images_production_provisionaccount
 
@@ -26,8 +25,7 @@ resource "aws_iam_role_policy_attachment" "thirdpartybucketread_production" {
   role       = module.user.production_role.name
 }
 
-# Attach third-party S3 bucket read-only policy to the staging
-# EC2AMICreate role
+# Attach third-party S3 bucket read-only policy to the staging role
 resource "aws_iam_role_policy_attachment" "thirdpartybucketread_staging" {
   provider = aws.images_staging_provisionaccount
 
