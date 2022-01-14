@@ -16,24 +16,8 @@ lint: |
   ansible-lint
   flake8
 platforms:
-  # - name: amazonlinux2
-  #   image: amazonlinux:2
-  # - name: debian10
-  #   image: debian:buster-slim
-  # - name: debian11
-  #   image: debian:bullseye-slim
   - name: kali
     image: kalilinux/kali-rolling
-  # - name: fedora32
-  #   image: fedora:32
-  # - name: fedora33
-  #   image: fedora:33
-  # - name: fedora34
-  #   image: fedora:34
-  # - name: ubuntu18
-  #   image: ubuntu:bionic
-  # - name: ubuntu20
-  #   image: ubuntu:focal
 provisioner:
   name: ansible
   inventory:
