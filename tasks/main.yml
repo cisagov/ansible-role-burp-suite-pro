@@ -78,7 +78,7 @@
     # cannot be done via the ansible.builtin.expect module.
     - name: License Burp Suite Pro
       ansible.builtin.shell: |
-        # $ ./jre/bin/java -Djava.awt.headless=true -jar ./burpsuite_pro.jar
+        # $ ./jre/bin/java -Djava.awt.headless=true --illegal-access=permit -jar ./burpsuite_pro.jar
         # Burp Suite Professional Terms & Conditions of Supply
         #
         # <snip>
@@ -98,7 +98,7 @@
         set timeout -1
         # Increase the input buffer size from 2000 to 10000 bytes
         match_max 10000
-        spawn ./jre/bin/java -Djava.awt.headless=true -jar ./burpsuite_pro.jar
+        spawn ./jre/bin/java -Djava.awt.headless=true --illegal-access=permit -jar ./burpsuite_pro.jar
 
         expect "Do you accept the license agreement\\?"
         send "y\n"
