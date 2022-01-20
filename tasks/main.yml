@@ -94,22 +94,43 @@
         # o
         # Your license is successfully installed and activated.
 
-        # Disable any internal timeout that expect has
-        set timeout -1
+        # Increase timeout from 10 to 300 seconds
+        set timeout 300
         # Increase the input buffer size from 2000 to 10000 bytes
         match_max 10000
         spawn ./jre/bin/java -Djava.awt.headless=true --illegal-access=permit -jar ./burpsuite_pro.jar
 
-        expect "Do you accept the license agreement\\?"
-        send "y\n"
+        expect {
+          "Do you accept the license agreement\\?" {
+            send "y\n"
+          } default {
+            exit 1
+          }
+        }
 
-        expect "To continue, please paste your license key below\\."
-        send "{{ lookup('file', '/tmp/' + license_object_name) }}\n"
+        expect {
+          "To continue, please paste your license key below\\." {
+            send "{{ lookup('file', '/tmp/' + license_object_name) }}\n"
+          } default {
+            exit 1
+          }
+        }
 
-        expect "Enter preferred activation method"
-        send "o\n"
+        expect {
+          "Enter preferred activation method" {
+            send "o\n"
+          } default {
+            exit 1
+          }
+        }
 
-        expect "Your license is successfully installed and activated\\."
+        expect {
+          "Your license is successfully installed and activated\\." {
+            exit 0
+          } default {
+            exit 1
+          }
+        }
       args:
         chdir: "{{ install_directory }}"
         executable: /usr/bin/expect
