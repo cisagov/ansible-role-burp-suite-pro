@@ -78,7 +78,7 @@
     # cannot be done via the ansible.builtin.expect module.
     #
     # The noqa is necessary because, as far as I can tell, the
-    # licensing process does not create and new files or directories;
+    # licensing process does not create any new files or directories;
     # therefore, I am unable to add a when clause for this task to
     # only run it when necessary and ansible-lint (rightly) complains
     # about this.
