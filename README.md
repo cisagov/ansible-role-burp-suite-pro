@@ -1,8 +1,7 @@
 # ansible-role-burp-suite-pro #
 
 [![GitHub Build Status](https://github.com/cisagov/ansible-role-burp-suite-pro/workflows/build/badge.svg)](https://github.com/cisagov/ansible-role-burp-suite-pro/actions)
-[![Total alerts](https://img.shields.io/lgtm/alerts/g/cisagov/ansible-role-burp-suite-pro.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/cisagov/ansible-role-burp-suite-pro/alerts/)
-[![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/cisagov/ansible-role-burp-suite-pro.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/cisagov/ansible-role-burp-suite-pro/context:python)
+[![CodeQL](https://github.com/cisagov/ansible-role-burp-suite-pro/workflows/CodeQL/badge.svg)](https://github.com/cisagov/ansible-role-burp-suite-pro/actions/workflows/codeql-analysis.yml)
 
 This is an Ansible role for installing [Burp Suite
 Professional](https://portswigger.net/burp/pro).
@@ -83,8 +82,10 @@ Here's how to use it in a playbook:
 - hosts: all
   become: yes
   become_method: sudo
-  roles:
-    - burp_suite_pro
+  tasks:
+    - name: Install Burp Suite Professional
+      ansible.builtin.include_role:
+        name: burp_suite_pro
 ```
 
 ## Contributing ##

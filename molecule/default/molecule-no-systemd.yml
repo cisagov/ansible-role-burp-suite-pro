@@ -16,8 +16,9 @@ lint: |
   ansible-lint
   flake8
 platforms:
-  - name: kali
-    image: kalilinux/kali-rolling
+  - image: kalilinux/kali-rolling
+    name: kali
+    platform: amd64
 provisioner:
   name: ansible
   inventory:
