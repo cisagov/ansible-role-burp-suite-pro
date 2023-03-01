@@ -1,8 +1,9 @@
 ---
+dependencies: []
 galaxy_info:
   author: Shane Frasier
-  description: Install Burp Suite Professional
   company: CISA Cyber Assessments
+  description: Install Burp Suite Professional
   galaxy_tags:
     - burp
     - burpsuite
@@ -23,5 +24,3 @@ galaxy_info:
         # https://www.kali.org/docs/policy/kali-linux-relationship-with-debian
         - bookworm
   role_name: burp_suite_pro
-
-dependencies: []
