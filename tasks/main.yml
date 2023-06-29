@@ -6,6 +6,7 @@
   register: burp_suite_directory
 
 - name: Install Burp Suite Pro
+  when: not burp_suite_directory.stat.exists
   block:
     - name: Grab Burp Suite Pro installer and license from S3
       ansible.builtin.aws_s3:
@@ -161,5 +162,3 @@
       loop:
         - "{{ installer_object_name }}"
         - "{{ license_object_name }}"
-
-  when: not burp_suite_directory.stat.exists
