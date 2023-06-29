@@ -1,17 +1,17 @@
 ---
 # The name of the AWS S3 bucket where third-party software is located
-third_party_bucket_name: cisa-cool-third-party-production
+burp_suite_pro_third_party_bucket_name: cisa-cool-third-party-production
 
 # The name of the S3 object corresponding to the Burp Suite Pro Linux
 # installer
-installer_object_name: burpsuite_pro_linux.sh
+burp_suite_pro_installer_object_name: burpsuite_pro_linux.sh
 
 # The name of the S3 object corresponding to the Burp Suite Pro
 # license
-license_object_name: burpsuite_pro.license
+burp_suite_pro_license_object_name: burpsuite_pro.license
 
 # Prerequisites needed to install Burp Suite Pro
-installation_prerequisites:
+burp_suite_pro_installation_prerequisites:
   # We use expect directly to perform the licensing.  We can't use the
   # ansible.builtin.expect module because the process outputs the
   # entire license text, which overflows the default input buffer size
@@ -25,12 +25,12 @@ installation_prerequisites:
   - python3-pexpect
 
 # The directory where Burp Suite Pro should be installed
-install_directory: /usr/local/BurpSuitePro
+burp_suite_pro_install_directory: /usr/local/BurpSuitePro
 
 # The directory where symlinks to the Burp Suite Pro executables
 # should be created
-symlinks_directory: /usr/local/bin
+burp_suite_pro_symlinks_directory: /usr/local/bin
 
 # Burp Suite Pro must be licensed individually for each user
-users:
+burp_suite_pro_users:
   - root

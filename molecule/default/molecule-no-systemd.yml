@@ -10,11 +10,6 @@ dependency:
   name: galaxy
 driver:
   name: docker
-lint: |
-  set -e
-  yamllint .
-  ansible-lint
-  flake8
 platforms:
   - image: kalilinux/kali-rolling
     name: kali
