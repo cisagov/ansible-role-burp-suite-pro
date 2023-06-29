@@ -63,12 +63,12 @@ None.
 
 | Variable | Description | Default | Required |
 |----------|-------------|---------|----------|
-| install\_directory | The directory where Burp Suite Pro should be installed. | `/usr/local/BurpSuitePro` | No |
-| installer\_object\_name | The name of the S3 object corresponding to the Burp Suite Pro Linux installer. | `burpsuite\_pro\_linux.sh` | No |
-| license\_object\_name | The name of the S3 object corresponding to the Burp Suite Pro license. | `burpsuite\_pro.license` | No |
-| symlinks_directory | The directory where symlinks to the Burp Suite Pro executables should be created. | `/usr/local/bin` | No |
-| third\_party\_bucket\_name | The name of the AWS S3 bucket where third-party software is located. | `cisa-cool-third-party-production` | No |
-| users | A list of users for whom Burp Suite Pro should be licensed.  (Burp Suite Pro must be licensed separately for each user that requires it.) | `[root]` | No |
+| burp\_suite\_pro\_install\_directory | The directory where Burp Suite Pro should be installed. | `/usr/local/BurpSuitePro` | No |
+| burp\_suite\_pro\_installer\_object\_name | The name of the S3 object corresponding to the Burp Suite Pro Linux installer. | `burpsuite\_pro\_linux.sh` | No |
+| burp\_suite\_pro\_license\_object\_name | The name of the S3 object corresponding to the Burp Suite Pro license. | `burpsuite\_pro.license` | No |
+| burp\_suite\_pro\_symlinks_directory | The directory where symlinks to the Burp Suite Pro executables should be created. | `/usr/local/bin` | No |
+| burp\_suite\_pro\_third\_party\_bucket\_name | The name of the AWS S3 bucket where third-party software is located. | `cisa-cool-third-party-production` | No |
+| burp\_suite\_pro\_users | A list of users for whom Burp Suite Pro should be licensed.  (Burp Suite Pro must be licensed separately for each user that requires it.) | `[root]` | No |
 
 ## Dependencies ##
 
