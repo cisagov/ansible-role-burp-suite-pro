@@ -11,24 +11,17 @@
     - name: Grab Burp Suite Pro installer and license from S3
       ansible.builtin.aws_s3:
         bucket: "{{ burp_suite_pro_third_party_bucket_name }}"
-        object: "{{ item }}"
-        dest: /tmp/{{ item }}
+        object: "{{ burp_suite_pro_installer_object_name }}"
+        dest: /tmp/{{ burp_suite_pro_installer_object_name }}
         mode: get
       become: no
       delegate_to: localhost
-      loop:
-        - "{{ burp_suite_pro_installer_object_name }}"
-        - "{{ burp_suite_pro_license_object_name }}"
 
-    - name: Copy the Burp Suite Pro installer and license
+    - name: Copy the Burp Suite Pro installer
       ansible.builtin.copy:
-        dest: /tmp/{{ item.file }}
-        mode: "{{ item.mode }}"
-        src: /tmp/{{ item.file }}
-      loop:
-        - {file: "{{ burp_suite_pro_installer_object_name }}", mode: "0700"}
-        # Other users must be able to read the license file as well
-        - {file: "{{ burp_suite_pro_license_object_name }}", mode: "0644"}
+        dest: /tmp/{{ burp_suite_pro_installer_object_name }}
+        mode: "0700"
+        src: /tmp/{{ burp_suite_pro_installer_object_name }}
 
     - name: Install Burp Suite Pro installation prerequisites
       ansible.builtin.package:
@@ -72,93 +65,14 @@
           "Select the folder where you would like Burp Suite Professional to create symlinks": "{{ burp_suite_pro_symlinks_directory }}"
         timeout: 300
 
-    # We can't use the ansible.builtin.expect module here because the
-    # licensing process outputs the entire license text, which
-    # overflows the default input buffer size of 2000 bytes.  Hence we
-    # need to increase the input buffer size for expect, and this
-    # cannot be done via the ansible.builtin.expect module.
-    #
-    # The noqa is necessary because, as far as I can tell, the
-    # licensing process does not create any new files or directories;
-    # therefore, I am unable to add a when clause for this task to
-    # only run it when necessary and ansible-lint (rightly) complains
-    # about this.
-    - name: License Burp Suite Pro  # noqa no-changed-when
-      ansible.builtin.shell: |
-        # $ ./jre/bin/java -Djava.awt.headless=true --illegal-access=permit -jar ./burpsuite_pro.jar
-        # Burp Suite Professional Terms & Conditions of Supply
-        #
-        # <snip>
-        # License text
-        # </snip>
-        # Do you accept the license agreement? (y/n)
-        # y
-        # This version of Burp requires a license key. To continue, please paste your license key below.
-        # <license key>
-        # Burp will now attempt to contact the license server and activate your license. This will require Internet access.
-        # NOTE: license activations are monitored. If you perform too many activations, further activations for this license may be prevented.
-        # Enter preferred activation method (o=online activation; m=manual activation; r=re-enter license key)
-        # o
-        # Your license is successfully installed and activated.
-
-        # Increase timeout from 10 to 300 seconds
-        set timeout 300
-        # Increase the input buffer size from 2000 to 10000 bytes
-        match_max 10000
-        spawn ./jre/bin/java -Djava.awt.headless=true --illegal-access=permit -jar ./burpsuite_pro.jar
-
-        expect {
-          "Do you accept the license agreement\\?" {
-            send "y\n"
-          } default {
-            exit 1
-          }
-        }
-
-        expect {
-          "To continue, please paste your license key below\\." {
-            send "{{ lookup('file', '/tmp/' + burp_suite_pro_license_object_name) }}\n"
-          } default {
-            exit 1
-          }
-        }
-
-        expect {
-          "Enter preferred activation method" {
-            send "o\n"
-          } default {
-            exit 1
-          }
-        }
-
-        expect {
-          "Your license is successfully installed and activated\\." {
-            exit 0
-          } default {
-            exit 1
-          }
-        }
-      args:
-        chdir: "{{ burp_suite_pro_install_directory }}"
-        executable: /usr/bin/expect
-      become_user: "{{ item }}"
-      loop: "{{ burp_suite_pro_users }}"
-      no_log: yes
-
-    - name: Delete local copies of Burp Suite Pro installer and license file
+    - name: Delete local copies of Burp Suite Pro installer
       ansible.builtin.file:
-        path: /tmp/{{ item }}
+        path: /tmp/{{ burp_suite_pro_installer_object_name }}
         state: absent
       become: no
       delegate_to: localhost
-      loop:
-        - "{{ burp_suite_pro_installer_object_name }}"
-        - "{{ burp_suite_pro_license_object_name }}"
 
-    - name: Delete remote copy of Burp Suite Pro installer and license file
+    - name: Delete remote copy of Burp Suite Pro installer
       ansible.builtin.file:
-        path: /tmp/{{ item }}
+        path: /tmp/{{ burp_suite_pro_installer_object_name }}
         state: absent
-      loop:
-        - "{{ burp_suite_pro_installer_object_name }}"
-        - "{{ burp_suite_pro_license_object_name }}"
