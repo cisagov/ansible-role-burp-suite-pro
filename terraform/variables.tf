@@ -12,30 +12,28 @@ variable "aws_region" {
 
 variable "production_bucket_name" {
   type        = string
-  description = "The name of the S3 bucket where the production Burp Suite Pro intaller and license live."
+  description = "The name of the S3 bucket where the production Burp Suite Pro intaller lives."
   default     = "cisa-cool-third-party-production"
 }
 
 variable "production_objects" {
   type        = list(string)
-  description = "The Burp Suite Pro installer and license objects inside the production bucket."
+  description = "The Burp Suite Pro installer object inside the production bucket."
   default = [
-    "burpsuite_pro.license",
     "burpsuite_pro_linux.sh",
   ]
 }
 
 variable "staging_bucket_name" {
   type        = string
-  description = "The name of the S3 bucket where the staging Burp Suite Pro intaller and license live."
+  description = "The name of the S3 bucket where the staging Burp Suite Pro intaller lives."
   default     = "cisa-cool-third-party-staging"
 }
 
 variable "staging_objects" {
   type        = list(string)
-  description = "The Burp Suite Pro installer and license objects inside the staging bucket."
+  description = "The Burp Suite Pro installer object inside the staging bucket."
   default = [
-    "burpsuite_pro.license",
     "burpsuite_pro_linux.sh",
   ]
 }
