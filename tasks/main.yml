@@ -14,7 +14,7 @@
         object: "{{ burp_suite_pro_installer_object_name }}"
         dest: /tmp/{{ burp_suite_pro_installer_object_name }}
         mode: get
-      become: no
+      become: false
       delegate_to: localhost
 
     - name: Copy the Burp Suite Pro installer
@@ -69,7 +69,7 @@
       ansible.builtin.file:
         path: /tmp/{{ burp_suite_pro_installer_object_name }}
         state: absent
-      become: no
+      become: false
       delegate_to: localhost
 
     - name: Delete remote copy of Burp Suite Pro installer
