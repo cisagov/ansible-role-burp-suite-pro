@@ -182,17 +182,18 @@ jobs:
           - amd64
           - arm64
         platform:
-          - amazonlinux2023-systemd
-          - debian10-systemd
-          - debian11-systemd
-          - debian12-systemd
-          - debian13-systemd
-          - fedora39-systemd
-          - fedora40-systemd
+          # This role only supports Kali.
+          # - amazonlinux2023-systemd
+          # - debian10-systemd
+          # - debian11-systemd
+          # - debian12-systemd
+          # - debian13-systemd
+          # - fedora39-systemd
+          # - fedora40-systemd
           - kali-systemd
-          - ubuntu-20-systemd
-          - ubuntu-22-systemd
-          - ubuntu-24-systemd
+          # - ubuntu-20-systemd
+          # - ubuntu-22-systemd
+          # - ubuntu-24-systemd
         scenario:
           - default
     steps:
