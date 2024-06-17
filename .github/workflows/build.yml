@@ -180,7 +180,8 @@ jobs:
       matrix:
         architecture:
           - amd64
-          - arm64
+          # Burp Suite Pro does not support ARM64.
+          # - arm64
         platform:
           # This role only supports Kali.
           # - amazonlinux2023-systemd
