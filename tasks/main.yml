@@ -9,7 +9,7 @@
   when: not burp_suite_directory.stat.exists
   block:
     - name: Grab Burp Suite Pro installer from S3
-      ansible.builtin.aws_s3:
+      amazon.aws.s3_object:
         bucket: "{{ burp_suite_pro_third_party_bucket_name }}"
         object: "{{ burp_suite_pro_installer_object_name }}"
         dest: /tmp/{{ burp_suite_pro_installer_object_name }}
