@@ -4,6 +4,7 @@ dependency:
 driver:
   name: docker
 platforms:
+  # This role only supports Kali.
   # - cgroupns_mode: host
   #   command: /lib/systemd/systemd
   #   image: docker.io/geerlingguy/docker-amazonlinux2023-ansible:latest
