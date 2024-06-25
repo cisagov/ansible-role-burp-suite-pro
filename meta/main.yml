@@ -13,7 +13,7 @@ galaxy_info:
     - burp
     - burpsuite
     - burpsuitepro
-  license: CC0
+  license: CC0-1.0
   # With the release of version 2.10, Ansible finally correctly
   # identifies Kali Linux as being the Kali distribution of the Debian
   # OS family.  This simplifies a lot of things for roles that support
@@ -22,8 +22,27 @@ galaxy_info:
   min_ansible_version: "2.10"
   namespace: cisagov
   platforms:
+    # This role only supports Kali.
+    # - name: Amazon Linux
+    #   versions:
+    #     - "2023"
+    # - name: Debian
+    #   versions:
+    #     - buster
+    #     - bullseye
+    #     - bookworm
+    #     - trixie
+    # - name: Fedora
+    #   versions:
+    #     - "39"
+    #     - "40"
     - name: Kali
       versions:
         - "2023"
+    # - name: Ubuntu
+    #   versions:
+    #     - focal
+    #     - jammy
+    #     - noble
   role_name: burp_suite_pro
   standalone: true
