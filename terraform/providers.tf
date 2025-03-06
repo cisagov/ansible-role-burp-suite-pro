@@ -23,26 +23,12 @@ provider "aws" {
   region = var.aws_region
 }
 
-# The provider used to create roles that can read objects from the
-# production third-party S3 bucket
+# The provider used to create roles that can read objects from the third-party
+# S3 bucket
 provider "aws" {
-  alias = "images_production_thirdparty"
+  alias = "images_provisionthirdpartybucketreadroles"
   assume_role {
-    role_arn     = data.terraform_remote_state.images_production.outputs.provisionthirdpartybucketreadroles_role.arn
-    session_name = local.caller_user_name
-  }
-  default_tags {
-    tags = var.tags
-  }
-  region = var.aws_region
-}
-
-# The provider used to create roles that can read objects from the
-# staging third-party S3 bucket
-provider "aws" {
-  alias = "images_staging_thirdparty"
-  assume_role {
-    role_arn     = data.terraform_remote_state.images_staging.outputs.provisionthirdpartybucketreadroles_role.arn
+    role_arn     = data.terraform_remote_state.images.outputs.provisionthirdpartybucketreadroles_role.arn
     session_name = local.caller_user_name
   }
   default_tags {
