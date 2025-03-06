@@ -110,7 +110,7 @@ None.
 | burp\_suite\_pro\_install\_directory | The directory where Burp Suite Pro should be installed. | `/usr/local/BurpSuitePro` | No |
 | burp\_suite\_pro\_installer\_object\_name | The name of the S3 object corresponding to the Burp Suite Pro Linux installer. | `burpsuite\_pro\_linux.sh` | No |
 | burp\_suite\_pro\_symlinks_directory | The directory where symlinks to the Burp Suite Pro executables should be created. | `/usr/local/bin` | No |
-| burp\_suite\_pro\_third\_party\_bucket\_name | The name of the AWS S3 bucket where third-party software is located. | `cisa-cool-third-party-production` | No |
+| burp\_suite\_pro\_third\_party\_bucket\_name | The name of the AWS S3 bucket where third-party software is located. | n/a | Yes |
 
 ## Dependencies ##
 
