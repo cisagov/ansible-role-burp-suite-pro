@@ -4,14 +4,9 @@ output "access_key" {
   sensitive   = true
 }
 
-output "production_bucket_policy" {
-  value       = module.production_bucket_access.policy
-  description = "The IAM policy that allows the CI user to read certain objects in the production third-party S3 bucket."
-}
-
-output "staging_bucket_policy" {
-  value       = module.staging_bucket_access.policy
-  description = "The IAM policy that allows the CI user to read certain objects in the staging third-party S3 bucket."
+output "bucket_access_policy" {
+  value       = module.bucket_access.policy
+  description = "The IAM policy that allows the CI user to read certain objects in the third-party S3 bucket."
 }
 
 output "role" {
