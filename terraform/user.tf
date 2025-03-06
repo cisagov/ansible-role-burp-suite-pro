@@ -3,11 +3,9 @@ module "user" {
   source = "github.com/cisagov/molecule-iam-user-tf-module"
 
   providers = {
-    aws                                    = aws.users
-    aws.images-production-provisionaccount = aws.images_production_provisionaccount
-    aws.images-staging-provisionaccount    = aws.images_staging_provisionaccount
-    aws.images-production-ssm              = aws.images_production_ssm
-    aws.images-staging-ssm                 = aws.images_staging_ssm
+    aws                         = aws.users
+    aws.images-provisionaccount = aws.images_provisionaccount
+    aws.images-ssm              = aws.images_ssm
   }
 
   entity = "ansible-role-burp-suite-pro"
