@@ -1,27 +1,14 @@
-# Create the roles that allow read-only access to the particular S3
+# Create the role that is allowed read-only access to the particular S3
 # objects that are required by this Ansible role
-module "production_bucket_access" {
+module "bucket_access" {
   source = "github.com/cisagov/s3-read-role-tf-module"
   providers = {
-    aws = aws.images_production_thirdparty
+    aws = aws.images_provisionthirdpartybucketreadroles
   }
 
   account_ids = [data.aws_caller_identity.current.account_id]
   entity_name = module.user.user.name
   role_name   = "ThirdPartyBucketRead-${module.user.user.name}"
-  s3_bucket   = var.production_bucket_name
-  s3_objects  = var.production_objects
-}
-
-module "staging_bucket_access" {
-  source = "github.com/cisagov/s3-read-role-tf-module"
-  providers = {
-    aws = aws.images_staging_thirdparty
-  }
-
-  account_ids = [data.aws_caller_identity.current.account_id]
-  entity_name = module.user.user.name
-  role_name   = "ThirdPartyBucketRead-${module.user.user.name}"
-  s3_bucket   = var.staging_bucket_name
-  s3_objects  = var.staging_objects
+  s3_bucket   = var.burp_suite_pro_bucket
+  s3_objects  = var.burp_suite_pro_objects
 }
