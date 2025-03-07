@@ -5,8 +5,8 @@ output "access_key" {
 }
 
 output "bucket_access_policy" {
-  value       = module.bucket_access.policy
   description = "The IAM policy that allows the CI user to read certain objects in the third-party S3 bucket."
+  value       = module.bucket_access.policy
 }
 
 output "role" {
