@@ -9,10 +9,6 @@ module "user" {
   }
 
   entity = "ansible-role-burp-suite-pro"
-  # The TF module will error if we don't put at least one value here.
-  # This build user does not need to access any SSM parameters, so we
-  # just place a dummy value here.
-  ssm_parameters = ["/dummy/value"]
 }
 
 # Attach third-party S3 bucket read-only policy to the test user role
