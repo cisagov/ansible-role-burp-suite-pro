@@ -1,49 +1,49 @@
 # ------------------------------------------------------------------------------
+# Required parameters
+#
+# You must provide a value for each of these parameters.
+# ------------------------------------------------------------------------------
+
+variable "burp_suite_pro_bucket" {
+  description = "The name of the S3 bucket where the Burp Suite Pro installer lives."
+  nullable    = false
+  type        = string
+}
+
+variable "terraform_state_bucket" {
+  description = "The name of the S3 bucket where Terraform state is stored."
+  nullable    = false
+  type        = string
+}
+
+# ------------------------------------------------------------------------------
 # Optional parameters
 #
 # These parameters have reasonable defaults.
 # ------------------------------------------------------------------------------
 
 variable "aws_region" {
-  type        = string
-  description = "The AWS region to deploy into (e.g. us-east-1)."
   default     = "us-east-1"
-}
-
-variable "production_bucket_name" {
+  description = "The AWS region to deploy into (e.g. us-east-1)."
+  nullable    = false
   type        = string
-  description = "The name of the S3 bucket where the production Burp Suite Pro installer lives."
-  default     = "cisa-cool-third-party-production"
 }
 
-variable "production_objects" {
-  type        = list(string)
-  description = "The Burp Suite Pro installer object inside the production bucket."
+variable "burp_suite_pro_objects" {
   default = [
     "burpsuite_pro_linux.sh",
   ]
-}
-
-variable "staging_bucket_name" {
-  type        = string
-  description = "The name of the S3 bucket where the staging Burp Suite Pro installer lives."
-  default     = "cisa-cool-third-party-staging"
-}
-
-variable "staging_objects" {
+  description = "The Burp Suite Pro installer object(s) inside the bucket."
+  nullable    = false
   type        = list(string)
-  description = "The Burp Suite Pro installer object inside the staging bucket."
-  default = [
-    "burpsuite_pro_linux.sh",
-  ]
 }
 
 variable "tags" {
-  type        = map(string)
-  description = "Tags to apply to all AWS resources created"
-
   default = {
     Team        = "VM Fusion - Development"
     Application = "ansible-role-burp-suite-pro testing"
   }
+  description = "Tags to apply to all AWS resources created"
+  nullable    = false
+  type        = map(string)
 }

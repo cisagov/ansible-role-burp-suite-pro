@@ -1,7 +1,4 @@
 ---
-# The name of the AWS S3 bucket where third-party software is located
-burp_suite_pro_third_party_bucket_name: cisa-cool-third-party-production
-
 # The name of the S3 object corresponding to the Burp Suite Pro Linux
 # installer
 burp_suite_pro_installer_object_name: burpsuite_pro_linux.sh
