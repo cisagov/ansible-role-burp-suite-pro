@@ -12,3 +12,11 @@ module "bucket_access" {
   s3_bucket   = var.burp_suite_pro_bucket
   s3_objects  = var.burp_suite_pro_objects
 }
+
+# Attach the bucket access policy to the role used by the test user
+resource "aws_iam_role_policy_attachment" "bucket_access" {
+  provider = aws.images_provisionaccount
+
+  policy_arn = module.bucket_access.policy.arn
+  role       = module.user.role.name
+}

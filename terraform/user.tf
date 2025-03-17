@@ -8,13 +8,6 @@ module "user" {
     aws.images-ssm              = aws.images_ssm
   }
 
-  entity = "ansible-role-burp-suite-pro"
-}
-
-# Attach third-party S3 bucket read-only policy to the test user role
-resource "aws_iam_role_policy_attachment" "thirdpartybucketread" {
-  provider = aws.images_provisionaccount
-
-  policy_arn = module.bucket_access.policy.arn
-  role       = module.user.role.name
+  entity         = "ansible-role-burp-suite-pro"
+  ssm_parameters = ["/third_party_bucket_name"]
 }
