@@ -32,6 +32,12 @@
         command: /tmp/{{ burp_suite_pro_installer_object_name }}
         creates: "{{ burp_suite_pro_install_directory }}"
         responses:
+          # yamllint complains about a long line in this comment, but
+          # I don't want to break it up because I am quoting verbatim
+          # the output of the Burp Suite Pro installer.  This is the
+          # reason for the yamllint disable directive below.
+          #
+          # yamllint disable rule:line-length
           # $ sudo ./burpsuite_pro_linux_v2020_11.sh
           # Unpacking JRE ...
           # Starting Installer ...
@@ -58,11 +64,21 @@
           # Extracting files ...
           # Setup has finished installing Burp Suite Professional on your computer.
           # Finishing installation ...
-          "This will install Burp Suite Professional on your computer\\.": o
-          "Where should Burp Suite Professional be installed\\?": "{{ burp_suite_pro_install_directory }}"
-          "Burp Suite Project File": "y"
-          "Create symlinks": "y"
-          "Select the folder where you would like Burp Suite Professional to create symlinks": "{{ burp_suite_pro_symlinks_directory }}"
+          #
+          # yamllint disable rule:line-length
+          #
+          # yamllint complains about quoted strings below, but we want
+          # the quotes so that the regex special characters are not
+          # interpreted as YAML special characters.  This is the
+          # reason for the yamllint disable directive below.
+          #
+          # yamllint disable rule:quoted-strings
+          'This will install Burp Suite Professional on your computer\.': o
+          'Where should Burp Suite Professional be installed\?': "{{ burp_suite_pro_install_directory }}"
+          Burp Suite Project File: "y"
+          Create symlinks: "y"
+          Select the folder where you would like Burp Suite Professional to create symlinks: "{{ burp_suite_pro_symlinks_directory }}"
+          # yamllint enable rule:quoted-strings
         timeout: 300
 
     - name: Delete local copies of Burp Suite Pro installer
