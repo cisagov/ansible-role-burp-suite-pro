@@ -1,6 +1,7 @@
 # ansible-role-burp-suite-pro #
 
 [![GitHub Build Status](https://github.com/cisagov/ansible-role-burp-suite-pro/workflows/build/badge.svg)](https://github.com/cisagov/ansible-role-burp-suite-pro/actions)
+[![License](https://img.shields.io/github/license/cisagov/ansible-role-burp-suite-pro)](https://spdx.org/licenses/)
 [![CodeQL](https://github.com/cisagov/ansible-role-burp-suite-pro/workflows/CodeQL/badge.svg)](https://github.com/cisagov/ansible-role-burp-suite-pro/actions/workflows/codeql-analysis.yml)
 
 This is an Ansible role for installing [Burp Suite
