@@ -44,5 +44,6 @@ galaxy_info:
     #   versions:
     #     - jammy
     #     - noble
+    #     - resolute
   role_name: burp_suite_pro
   standalone: true
